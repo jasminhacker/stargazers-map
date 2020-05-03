@@ -22,4 +22,4 @@ Without authenticating to the Github API you will be limited to 60 requests per 
 If ratelimiting is applied, `fetch.py` will automatically wait until the limit is reset. Since this can take a while, all progress is stored locally using `shelve`. The script can be interrupted at any time and will not lose any progress. This applies to both the github API requests as well as the Nominatim requests in `visualize.py`.  
 As several thousand avatars can be displayed in the map, they are loaded lazily on click.
 
-For an interactive example you can open [example.html](https://github.com/jonathanhacker/stargazers-map/blob/master/example.html) in your browser (caution: 4MB).
+For an interactive example you can open [example.html](https://jonathanhacker.github.io/stargazers-map/example) in your browser (caution: 4MB).
