@@ -12,12 +12,18 @@ if [ -z "$GITHUB_TOKEN" ] ; then
 	echo "Please enter a token if available or leave blank to continue without token."
 	echo -n "Token: "
 	read TOKEN
+	if [ -z "$TOKEN" ] ; then 
+		./fetch.py $1
+	else 
+		GITHUB_TOKEN=$TOKEN ./fetch.py $1
+	fi
 else
-	TOKEN="$GITHUB_TOKEN"
+	./fetch.py $1
 fi
 
-if ! GITHUB_TOKEN=$TOKEN ./fetch.py $1 ; then 
-	exit $?
+result=$?
+if [ $result -ne 0 ] ; then 
+	exit $result
 fi
 
 for i in $(echo $1 | tr '/' "\n") ; do
