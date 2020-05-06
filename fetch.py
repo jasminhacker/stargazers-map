@@ -20,9 +20,6 @@ args = parser.parse_args()
 
 if "GITHUB_TOKEN" not in os.environ:
     print("using unauthenticated github api, rate limiting applies")
-    print("to login with your account, run")
-    print('` export GITHUB_TOKEN="<your OAuth-token>"`')
-    print("get your token from https://github.com/settings/tokens/new")
     g = Github()
 else:
     g = Github(os.environ["GITHUB_TOKEN"])
