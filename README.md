@@ -7,7 +7,7 @@ cd stargazers-map
 pip3 install -r requirements.txt
 ./fetch.py jonathanhacker/stargazers-map
 ./visualize.py stargazers-map_stargazers.json
-firefox map.html
+xdg-open map.html # This needs `xdg-utils` to be installed, otherwise, just use your favorite browser
 ```
 
 `fetch.py` fetches information about every stargazer of the given repository via the Github API and stores it in a json file. This file is then read by `visualize.py`, which looks up all location descriptions on [Nominatim](https://nominatim.openstreetmap.org/search). The resulting coordinates are then displayed on an interactive map using [folium](https://github.com/python-visualization/folium/). Every marker gives information about the respective Github user.
