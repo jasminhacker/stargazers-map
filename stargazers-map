@@ -16,7 +16,7 @@ else
 	TOKEN="$GITHUB_TOKEN"
 fi
 
-if ! GITHUB_TOKEN=$TOKEN ./fetch.py $1 > /dev/null ; then 
+if ! GITHUB_TOKEN=$TOKEN ./fetch.py $1 ; then 
 	exit $?
 fi
 
