@@ -1,0 +1,39 @@
+#!/bin/sh
+
+if [ -z "$1" ] ; then 
+	echo "You have to provide a repository";
+	exit 1
+fi
+
+if [ -z "$GITHUB_TOKEN" ] ; then 
+	echo "You didn't provide a Github OAuth token."
+	echo "Without a token there is a rate-limit of 60 requests per hour (based on IP)."
+	echo "Visit https://github.com/settings/tokens/new to create a token."
+	echo "Please enter a token if available or leave blank to continue without token."
+	echo -n "Token: "
+	read TOKEN
+else
+	TOKEN="$GITHUB_TOKEN"
+fi
+
+if ! GITHUB_TOKEN=$TOKEN ./fetch.py $1 > /dev/null ; then 
+	exit $?
+fi
+
+for i in $(echo $1 | tr '/' "\n") ; do
+  rep=$i
+done
+
+if ! ./visualize.py "${rep}_stargazers.json" ; then
+	exit $?
+fi
+
+if which xdg-open &> /dev/null ; then
+	xdg-open map.html
+elif which firefox &> /dev/null ; then
+	firefox map.html
+elif which chromium &> /dev/null ; then
+	chromium map.html
+else
+	echo "Could not detect a browser. Open `./map.html` to see the map"
+fi
